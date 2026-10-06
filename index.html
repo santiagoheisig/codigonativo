@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<!-- El atributo "lang" le dice al navegador (y a los lectores de pantalla) en qué idioma está la página.
+     El JavaScript lo cambia a "en" cuando se elige inglés. -->
+<html lang="es">
+<head>
+  <!-- ============================================================
+       HEAD: información sobre la página que no se ve en pantalla
+       ============================================================ -->
+
+  <!-- Codificación de caracteres: permite tildes, ñ, etc. -->
+  <meta charset="UTF-8">
+  <!-- Hace que en el celular la página use el ancho real de la pantalla -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Título de la pestaña y de los resultados de Google -->
+  <title>Código Nativo — Equipos de Data e IA para consultoras</title>
+  <!-- Descripción que muestra Google debajo del título -->
+  <meta name="description" content="Equipos de Data e IA para consultoras que ganaron un contrato y no tienen gente. Un equipo que lleva años trabajando junto, con un responsable técnico como único interlocutor.">
+
+  <!-- Open Graph: lo que muestran LinkedIn y WhatsApp al compartir el link.
+       La imagen tiene que ser una dirección completa (con https://), por eso apunta al dominio. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Código Nativo">
+  <meta property="og:title" content="Código Nativo — Equipos de Data e IA para consultoras">
+  <meta property="og:description" content="Un equipo de Data e IA que lleva años trabajando junto, con un responsable técnico como único interlocutor. Dentro de tus procesos y bajo tu marca.">
+  <meta property="og:url" content="https://codigonativo.com.ar/">
+  <meta property="og:image" content="https://codigonativo.com.ar/assets/og-image.png">
+  <meta property="og:image:width" content="618">
+  <meta property="og:image:height" content="617">
+  <meta property="og:image:alt" content="Símbolo de Código Nativo">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <!-- Favicon: el iconito de la pestaña del navegador -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-simbolo.svg">
+
+  <!-- Tipografía Inter desde Google Fonts (la única dependencia externa).
+       "preconnect" adelanta la conexión para que cargue más rápido. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Marcamos que el JavaScript funciona. El CSS usa esta clase para activar la
+       animación de aparición (si no hay JS, todo se ve igual). Va acá arriba, antes
+       de que se dibuje la página, para evitar un parpadeo al cargar. -->
+  <script>document.documentElement.classList.add('js');</script>
+
+  <style>
+    /* ============================================================
+       1. VARIABLES DE COLOR
+       Todo el color de la página sale de acá. Si cambiás un valor,
+       cambia en toda la web.
+       ============================================================ */
+    :root {
+      --bg: #07080A;              /* fondo principal, casi negro */
+      --bg-elevated: #0E1014;     /* fondo de tarjetas */
+      --bg-translucent: rgba(7, 8, 10, 0.72);     /* fondo del header (semitransparente) */
+      --border: rgba(255, 255, 255, 0.08);        /* bordes finos */
+      --border-hover: rgba(255, 255, 255, 0.20);  /* bordes al pasar el mouse */
+      --text: #ECEDEE;            /* texto principal */
+      --text-muted: #9BA1A6;      /* texto secundario */
+      --accent: #FFFFFF;          /* acento: blanco puro */
+      --accent-soft: rgba(255, 255, 255, 0.10);   /* brillo blanco suave */
+      --card-shine: rgba(255, 255, 255, 0.03);    /* degradado muy sutil arriba de las tarjetas */
+
+      /* Medidas que se repiten */
+      --max-width: 1120px;        /* ancho máximo del contenido */
+      --gutter: 24px;             /* margen lateral */
+      --section-space: 120px;     /* separación entre secciones */
+      --radius: 16px;             /* esquinas redondeadas de las tarjetas */
+    }
+
+    /* ============================================================
+       2. ESTILOS GENERALES
+       ============================================================ */
+
+    /* box-sizing: border-box hace que el padding y el borde queden
+       DENTRO del ancho que le damos a cada elemento. Simplifica todo. */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;    /* al tocar un enlace interno, baja suave */
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text-muted);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;         /* evita scroll horizontal por los brillos */
+    }
+
+    /* Ocultar el idioma que no corresponde.
+       Si el body tiene "show-es", se esconde todo lo que tenga "lang-en", y al revés. */
+    .show-es .lang-en { display: none; }
+    .show-en .lang-es { display: none; }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: inherit; }
+
+    h1, h2, h3 {
+      color: var(--text);
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    p { margin: 0; }
+
+    /* Contenedor: centra el contenido y le pone el ancho máximo y los márgenes */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* Cada sección tiene la misma separación arriba y abajo */
+    .section {
+      padding: var(--section-space) 0 0;
+    }
+
+    /* Al saltar a una sección desde el menú, deja espacio para el header fijo */
+    section[id] {
+      scroll-margin-top: 72px;
+    }
+
+    /* Contorno visible al navegar con teclado (tecla Tab) */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* Enlace "Saltar al contenido": invisible hasta que se navega con teclado */
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -60px;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 8px 16px;
+      border-radius: 8px;
+      z-index: 100;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .skip-link:focus { top: 12px; }
+
+    /* ============================================================
+       3. TIPOGRAFÍA Y ENCABEZADOS DE SECCIÓN
+       ============================================================ */
+
+    /* Etiqueta pequeña en mayúsculas arriba de cada título */
+    .eyebrow {
+      display: block;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      line-height: 1.05;
+      /* Degradado aplicado al texto: se pinta el fondo y se "recorta" con la forma de las letras */
+      background: linear-gradient(180deg, var(--accent) 40%, var(--text-muted) 130%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      letter-spacing: -0.02em;
+      font-weight: 600;
+    }
+
+    h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    /* Bloque de eyebrow + título + intro que encabeza cada sección */
+    .section-header {
+      max-width: 720px;
+      margin-bottom: 48px;
+    }
+    .section-header p {
+      margin-top: 16px;
+      font-size: 1.125rem;
+    }
+
+    /* ============================================================
+       4. BOTONES Y CHIPS
+       ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 999px;       /* bordes totalmente redondeados (forma de pastilla) */
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
+    }
+
+    /* Botón principal: blanco con texto negro */
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .btn-primary:hover { opacity: 0.88; }
+
+    /* Botón secundario: transparente con borde fino */
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border-hover);
+    }
+    .btn-secondary:hover { background: var(--accent-soft); }
+
+    /* Chips: pastillas pequeñas con el stack tecnológico */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;            /* si no entran, pasan a la línea siguiente */
+      gap: 8px;
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 0;
+    }
+    .chips li {
+      font-size: 0.8rem;
+      color: var(--text);
+      border: 1px solid var(--border-hover);
+      border-radius: 999px;
+      padding: 4px 12px;
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       5. TARJETAS (se usan en casi todas las secciones)
+       ============================================================ */
+    .card {
+      background: linear-gradient(180deg, var(--card-shine), transparent 50%), var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.25s;
+    }
+    .card:hover { border-color: var(--border-hover); }
+    .card h3 { margin-bottom: 10px; }
+
+    /* Grillas de tarjetas: "repeat(N, 1fr)" crea N columnas iguales */
+    .grid { display: grid; gap: 20px; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+    /* ============================================================
+       6. HEADER
+       ============================================================ */
+    .header {
+      position: sticky;           /* queda pegado arriba al hacer scroll */
+      top: 0;
+      z-index: 50;
+      background: var(--bg-translucent);
+      backdrop-filter: blur(12px);          /* desenfoca lo que pasa por detrás */
+      -webkit-backdrop-filter: blur(12px);  /* lo mismo para Safari */
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 16px;
+    }
+
+    /* Logo + nombre (se usa en el header y en el footer) */
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+    .brand img { height: 30px; width: auto; }
+
+    /* Enlaces del centro */
+    .nav {
+      display: flex;
+      gap: 32px;
+    }
+    .nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav a:hover { color: var(--text); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-actions .btn {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+    }
+
+    /* Botón ES / EN: el idioma activo se ve en blanco, el otro en gris */
+    .lang-switch {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .lang-switch:hover { border-color: var(--border-hover); }
+    .show-es .opt-es,
+    .show-en .opt-en { color: var(--accent); }
+
+    /* ============================================================
+       7. HERO (la primera sección, con brillo, grilla y puntos de luz)
+       ============================================================ */
+    .hero {
+      position: relative;         /* para ubicar los efectos de fondo adentro */
+      overflow: hidden;           /* que los efectos no se salgan */
+      padding: 140px 0 110px;
+      text-align: center;
+    }
+
+    /* Grilla sutil: dos degradados de 1px forman las líneas horizontales y verticales.
+       mask-image hace que se desvanezca hacia los bordes. */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 20%, transparent 75%);
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 20%, transparent 75%);
+      pointer-events: none;
+    }
+
+    /* Brillo: un degradado radial blanco muy suave arriba del título */
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -260px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1100px;
+      max-width: 160vw;
+      height: 640px;
+      background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Puntos de luz: pequeños círculos blancos tenues que titilan despacio */
+    .hero-dots span {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.35;
+      box-shadow: 0 0 8px var(--accent);
+      animation: titilar 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes titilar {
+      0%, 100% { opacity: 0.15; }
+      50%      { opacity: 0.6; }
+    }
+
+    /* El contenido va por encima de los efectos */
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-subtitle {
+      max-width: 660px;
+      margin: 28px auto 0;
+      font-size: 1.125rem;
+    }
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    /* ============================================================
+       8. FRANJA DE CLIENTES
+       ============================================================ */
+    .clients {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+    }
+    .clients-label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .clients-names {
+      color: var(--text);
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+
+    /* ============================================================
+       9. FORMATOS (la tarjeta destacada tiene borde más claro y brillo)
+       ============================================================ */
+    .card-featured {
+      border-color: var(--border-hover);
+      box-shadow: 0 0 80px -20px var(--accent-soft);
+    }
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .card-title-row h3 { margin: 0; }
+    .tag {
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 2px 10px;
+    }
+
+    /* ============================================================
+       10. CÓMO EMPEZAMOS (pasos con número grande)
+       ============================================================ */
+    .step-number {
+      display: block;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 20px;
+      background: linear-gradient(180deg, var(--accent), var(--text-muted) 140%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* ============================================================
+       11. CASOS
+       La grilla tiene 6 columnas: las 2 primeras tarjetas ocupan 3 cada una
+       (mitad y mitad) y las otras 3 ocupan 2 cada una (un tercio).
+       ============================================================ */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+    }
+    .case { grid-column: span 2; display: flex; flex-direction: column; }
+    .case-large { grid-column: span 3; }
+    .case .chips { margin-top: auto; padding-top: 20px; }  /* chips siempre abajo */
+    .case-client {
+      display: block;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .case p { margin-bottom: 4px; }
+
+    /* ============================================================
+       12. QUIÉN RESPONDE
+       ============================================================ */
+    .about {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-photo {
+      position: relative;
+    }
+    /* Brillo blanco suave detrás de la foto */
+    .about-photo::before {
+      content: "";
+      position: absolute;
+      inset: -60px;
+      background: radial-gradient(circle, var(--accent-soft) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .about-photo img {
+      position: relative;
+      width: 100%;
+      height: auto;               /* sin esto, el height="1280" del HTML estira la foto */
+      aspect-ratio: 4 / 5;
+      object-fit: cover;          /* recorta la foto sin deformarla */
+      object-position: 50% 30%;   /* centra el recorte en la cara */
+      border-radius: 24px;
+      border: 1px solid var(--border-hover);
+    }
+    .about-name {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      letter-spacing: -0.02em;
+      font-weight: 600;
+    }
+    .about-role {
+      color: var(--text);
+      font-weight: 500;
+      margin-top: 6px;
+    }
+    .about-text {
+      margin-top: 20px;
+      font-size: 1.125rem;
+      max-width: 560px;
+    }
+
+    /* ============================================================
+       13. CONTACTO (formulario)
+       ============================================================ */
+    .contact-card {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 48px;
+      box-shadow: 0 0 120px -40px var(--accent-soft);
+    }
+    .contact-card .section-header {
+      text-align: center;
+      margin: 0 auto 32px;
+    }
+    .field { margin-bottom: 20px; }
+    .field label {
+      display: block;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .field input,
+    .field textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border-hover);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 12px 14px;
+      transition: border-color 0.2s;
+    }
+    .field input:focus,
+    .field textarea:focus { border-color: var(--accent); }
+    .field textarea { min-height: 140px; resize: vertical; }
+    .contact-card .btn { width: 100%; margin-top: 8px; padding: 14px 22px; }
+
+    /* ============================================================
+       14. FOOTER
+       ============================================================ */
+    .footer {
+      margin-top: var(--section-space);
+      border-top: 1px solid var(--border);
+      padding: 56px 0 40px;
+      font-size: 0.95rem;
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .footer .brand img { height: 44px; }
+    .footer .brand { font-size: 1.15rem; }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-links a { text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy {
+      margin-top: 40px;
+      font-size: 0.85rem;
+    }
+
+    /* ============================================================
+       15. ANIMACIÓN AL HACER SCROLL
+       Las secciones con la clase "reveal" arrancan invisibles y un poco más abajo.
+       Cuando aparecen en pantalla, el JavaScript les agrega "visible".
+       Solo se aplica si el JavaScript funciona (clase "js" en el <html>),
+       así nunca queda contenido escondido.
+       ============================================================ */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .js .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ============================================================
+       16. RESPONSIVE: ajustes para pantallas más chicas
+       "max-width: 900px" significa "aplicar solo si la pantalla mide 900px o menos".
+       ============================================================ */
+    @media (max-width: 900px) {
+      .nav { display: none; }                         /* se ocultan los enlaces del centro */
+      .grid-3 { grid-template-columns: 1fr; }
+      .cases-grid { grid-template-columns: repeat(2, 1fr); }
+      .case, .case-large { grid-column: span 1; }
+      .case:last-child { grid-column: span 2; }       /* la 5ª tarjeta ocupa todo el ancho */
+      .about { grid-template-columns: 240px 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --gutter: 16px;
+        --section-space: 72px;
+      }
+      .grid-2 { grid-template-columns: 1fr; }
+      .cases-grid { grid-template-columns: 1fr; }
+      .case:last-child { grid-column: span 1; }
+      .hero { padding: 88px 0 72px; }
+      .card { padding: 24px; }
+      .contact-card { padding: 28px 20px; }
+      .about { grid-template-columns: 1fr; gap: 32px; }  /* foto arriba, texto abajo */
+      .about-photo { max-width: 260px; }
+      .hero-buttons .btn { width: 100%; }
+    }
+
+    /* En celulares muy angostos (360px) achicamos un poco el header para que entre todo */
+    @media (max-width: 400px) {
+      .brand { font-size: 0.9rem; gap: 8px; }
+      .brand img { height: 26px; }
+      .header-actions { gap: 6px; }
+      .header-actions .btn { padding: 7px 12px; }
+      .lang-switch { padding: 7px 10px; }
+    }
+
+    /* ============================================================
+       17. MENOS ANIMACIÓN
+       Si la persona configuró su sistema para reducir el movimiento,
+       se apagan todas las animaciones y transiciones.
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<!-- La clase "show-es" hace que se vea el español. El JavaScript la cambia a "show-en". -->
+<body class="show-es">
+
+  <a class="skip-link" href="#contenido">
+    <span class="lang-es">Saltar al contenido</span>
+    <span class="lang-en">Skip to content</span>
+  </a>
+
+  <!-- ============================================================
+       1. HEADER
+       ============================================================ -->
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <img src="assets/logo-simbolo.svg" alt="" width="24" height="30">
+        Código Nativo
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="#como-trabajamos"><span class="lang-es">Cómo trabajamos</span><span class="lang-en">How we work</span></a>
+        <a href="#perfiles"><span class="lang-es">Perfiles</span><span class="lang-en">Profiles</span></a>
+        <a href="#casos"><span class="lang-es">Casos</span><span class="lang-en">Case studies</span></a>
+        <a href="#contacto"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Botón de idioma: al hacer clic llama a la función cambiarIdioma() del JavaScript -->
+        <button class="lang-switch" type="button" id="lang-switch" aria-label="Cambiar idioma / Change language">
+          <span class="opt-es">ES</span> / <span class="opt-en">EN</span>
+        </button>
+        <a class="btn btn-primary" href="#contacto">
+          <span class="lang-es">Contacto</span><span class="lang-en">Contact</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ============================================================
+         2. HERO
+         ============================================================ -->
+    <section class="hero">
+      <!-- Puntos de luz decorativos. aria-hidden="true" hace que los lectores de pantalla los ignoren.
+           Cada punto tiene su posición y un retraso distinto para que no titilen todos juntos. -->
+      <div class="hero-dots" aria-hidden="true">
+        <span style="top: 18%; left: 12%; animation-delay: 0s;"></span>
+        <span style="top: 32%; left: 22%; animation-delay: 1.2s;"></span>
+        <span style="top: 12%; left: 38%; animation-delay: 2.4s;"></span>
+        <span style="top: 26%; left: 64%; animation-delay: 0.6s;"></span>
+        <span style="top: 10%; left: 78%; animation-delay: 1.8s;"></span>
+        <span style="top: 40%; left: 88%; animation-delay: 3s;"></span>
+        <span style="top: 62%; left: 8%; animation-delay: 3.6s;"></span>
+        <span style="top: 70%; left: 92%; animation-delay: 2s;"></span>
+        <span style="top: 52%; left: 30%; animation-delay: 4.2s;"></span>
+        <span style="top: 58%; left: 72%; animation-delay: 1s;"></span>
+      </div>
+
+      <div class="container">
+        <span class="eyebrow">
+          <span class="lang-es">Equipos de Data e IA para consultoras</span>
+          <span class="lang-en">Data &amp; AI teams for consultancies</span>
+        </span>
+        <h1>
+          <span class="lang-es">¿Ganaste el contrato y te falta gente de datos?</span>
+          <span class="lang-en">Won the contract but short on data people?</span>
+        </h1>
+        <p class="hero-subtitle">
+          <span class="lang-es">Te damos un equipo de Data e IA que lleva años trabajando junto, con un responsable técnico como único interlocutor. Dentro de tus procesos y bajo tu marca.</span>
+          <span class="lang-en">We give you a Data &amp; AI team that has worked together for years, with one technical lead as your single point of contact. Inside your processes and under your brand.</span>
+        </p>
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="#contacto">
+            <span class="lang-es">Cuéntanos qué perfiles necesitas</span>
+            <span class="lang-en">Tell us which profiles you need</span>
+          </a>
+          <a class="btn btn-secondary" href="#casos">
+            <span class="lang-es">Ver casos</span>
+            <span class="lang-en">See case studies</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. FRANJA DE CLIENTES (solo texto, sin logos)
+         ============================================================ -->
+    <section class="clients">
+      <div class="container">
+        <span class="clients-label">
+          <span class="lang-es">Han trabajado con nosotros</span>
+          <span class="lang-en">Companies we have worked with</span>
+        </span>
+        <p class="clients-names">Unilever · Whirlpool · Ayesa · Puma · Grupo Dota</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. POR QUÉ NOSOTROS
+         ============================================================ -->
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">
+            <span class="lang-es">Por qué nosotros</span>
+            <span class="lang-en">Why us</span>
+          </span>
+          <h2>
+            <span class="lang-es">Contratar lleva meses. Tu cliente no espera.</span>
+            <span class="lang-en">Hiring takes months. Your client won't wait.</span>
+          </h2>
+          <p>
+            <span class="lang-es">Una bolsa de freelancers te deja a ti gestionando personas sueltas frente a tu cliente. Nosotros te damos un equipo.</span>
+            <span class="lang-en">A pool of freelancers leaves you managing loose individuals in front of your client. We give you a team.</span>
+          </p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h3><span class="lang-es">Un equipo, no personas sueltas</span><span class="lang-en">A team, not individuals</span></h3>
+            <p>
+              <span class="lang-es">Llevamos años trabajando juntos en los mismos proyectos. No pierdes semanas en que se conozcan.</span>
+              <span class="lang-en">We have worked together on the same projects for years. No weeks lost getting to know each other.</span>
+            </p>
+          </div>
+          <div class="card">
+            <h3><span class="lang-es">Un solo interlocutor técnico</span><span class="lang-en">One technical point of contact</span></h3>
+            <p>
+              <span class="lang-es">Un responsable técnico con nombre responde por el equipo y por la entrega.</span>
+              <span class="lang-en">A named technical lead is accountable for the team and the delivery.</span>
+            </p>
+          </div>
+          <div class="card">
+            <h3><span class="lang-es">Reemplazos a nuestro cargo</span><span class="lang-en">Replacements on us</span></h3>
+            <p>
+              <span class="lang-es">Si alguien sale, lo reemplazamos nosotros, sin coste para ti.</span>
+              <span class="lang-en">If someone leaves, we replace them at no cost to you.</span>
+            </p>
+          </div>
+          <div class="card">
+            <h3><span class="lang-es">Bajo tu marca</span><span class="lang-en">Under your brand</span></h3>
+            <p>
+              <span class="lang-es">Tu Jira, tu repositorio, tus code reviews, tu definición de terminado. Para tu cliente, somos parte de tu equipo.</span>
+              <span class="lang-en">Your Jira, your repo, your code reviews, your definition of done. To your client, we are part of your team.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. FORMATOS
+         ============================================================ -->
+    <section class="section reveal" id="como-trabajamos">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">
+            <span class="lang-es">Cómo trabajamos</span>
+            <span class="lang-en">How we work</span>
+          </span>
+          <h2>
+            <span class="lang-es">Dos formas de trabajar con nosotros</span>
+            <span class="lang-en">Two ways to work with us</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-2">
+          <!-- Tarjeta destacada -->
+          <div class="card card-featured">
+            <div class="card-title-row">
+              <h3><span class="lang-es">Equipo dedicado</span><span class="lang-en">Dedicated team</span></h3>
+              <span class="tag"><span class="lang-es">Principal</span><span class="lang-en">Main</span></span>
+            </div>
+            <p>
+              <span class="lang-es">De 1 a 4 personas por mes, responsable técnico incluido. Mínimo 3 meses.</span>
+              <span class="lang-en">1 to 4 people per month, technical lead included. 3-month minimum.</span>
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-title-row">
+              <h3><span class="lang-es">Alcance cerrado</span><span class="lang-en">Fixed scope</span></h3>
+            </div>
+            <p>
+              <span class="lang-es">Entregable definido, precio fijo y fecha. Ideal para un primer proyecto.</span>
+              <span class="lang-en">Defined deliverable, fixed price and date. Ideal for a first project.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. PERFILES
+         ============================================================ -->
+    <section class="section reveal" id="perfiles">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">
+            <span class="lang-es">Perfiles</span>
+            <span class="lang-en">Profiles</span>
+          </span>
+          <h2>
+            <span class="lang-es">Los perfiles que sumamos a tu proyecto</span>
+            <span class="lang-en">The profiles we add to your project</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Data Engineer</h3>
+            <p>
+              <span class="lang-es">Pipelines de datos fiables, de la ingesta al modelo listo para consumir.</span>
+              <span class="lang-en">Reliable data pipelines, from ingestion to consumption-ready models.</span>
+            </p>
+            <ul class="chips">
+              <li>Python</li><li>SQL</li><li>Airflow</li><li>dbt</li><li>BigQuery</li><li>Cloud SQL</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Cloud / Data Architect</h3>
+            <p>
+              <span class="lang-es">Diseño de plataformas de datos, migraciones y gobierno del dato.</span>
+              <span class="lang-en">Data platform design, migrations and data governance.</span>
+            </p>
+            <ul class="chips">
+              <li>GCP</li>
+              <li><span class="lang-es">Migraciones Azure → GCP</span><span class="lang-en">Azure → GCP migrations</span></li>
+              <li>Kubernetes</li>
+              <li><span class="lang-es">Modelado</span><span class="lang-en">Data modeling</span></li>
+              <li><span class="lang-es">Gobierno del dato</span><span class="lang-en">Data governance</span></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>AI Engineer</h3>
+            <p>
+              <span class="lang-es">IA en producción sobre datos gobernados.</span>
+              <span class="lang-en">Production AI on top of governed data.</span>
+            </p>
+            <ul class="chips">
+              <li>RAG</li>
+              <li><span class="lang-es">Sistemas multi-agente</span><span class="lang-en">Multi-agent systems</span></li>
+              <li>Vertex AI</li>
+              <li><span class="lang-es">Apps con LLM</span><span class="lang-en">LLM apps</span></li>
+              <li><span class="lang-es">Modelos predictivos</span><span class="lang-en">Predictive models</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. CÓMO EMPEZAMOS
+         ============================================================ -->
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">
+            <span class="lang-es">Cómo empezamos</span>
+            <span class="lang-en">How we start</span>
+          </span>
+          <h2>
+            <span class="lang-es">Sin riesgo para ti frente a tu cliente</span>
+            <span class="lang-en">No risk for you in front of your client</span>
+          </h2>
+        </div>
+
+        <!-- <ol> es una lista numerada: le indica al navegador que el orden importa -->
+        <ol class="grid grid-3" style="list-style: none; padding: 0; margin: 0;">
+          <li class="card">
+            <span class="step-number" aria-hidden="true">01</span>
+            <h3><span class="lang-es">Nos cuentas el proyecto</span><span class="lang-en">Tell us about the project</span></h3>
+            <p>
+              <span class="lang-es">Contrato, stack, plazo y perfiles que te faltan.</span>
+              <span class="lang-en">Contract, stack, timeline and the profiles you are missing.</span>
+            </p>
+          </li>
+          <li class="card">
+            <span class="step-number" aria-hidden="true">02</span>
+            <h3><span class="lang-es">Tu arquitecto entrevista al equipo</span><span class="lang-en">Your architect interviews the team</span></h3>
+            <p>
+              <span class="lang-es">Antes de arrancar, conoces a quienes van a trabajar contigo.</span>
+              <span class="lang-en">Before we start, you meet the people who will work with you.</span>
+            </p>
+          </li>
+          <li class="card">
+            <span class="step-number" aria-hidden="true">03</span>
+            <h3><span class="lang-es">Arrancamos con una revisión a las dos semanas</span><span class="lang-en">We start with a two-week review</span></h3>
+            <p>
+              <span class="lang-es">Empezamos por un alcance acotado. Si no encaja, lo dejamos ahí.</span>
+              <span class="lang-en">We begin with a limited scope. If it is not a fit, we stop there.</span>
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         8. CASOS
+         ============================================================ -->
+    <section class="section reveal" id="casos">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">
+            <span class="lang-es">Casos</span>
+            <span class="lang-en">Case studies</span>
+          </span>
+          <h2>
+            <span class="lang-es">Lo que hemos hecho</span>
+            <span class="lang-en">What we have done</span>
+          </h2>
+        </div>
+
+        <div class="cases-grid">
+          <!-- Ayesa (grande) -->
+          <article class="card case case-large">
+            <span class="case-client">Ayesa</span>
+            <h3><span class="lang-es">Datos e IA para el sector público</span><span class="lang-en">Data and AI for the public sector</span></h3>
+            <p>
+              <span class="lang-es">Plataforma de datos en GCP sobre fuentes muy distintas entre sí (webs, XML, APIs), con gobierno del dato por capas. Sobre ella, agentes de IA que responden preguntas en lenguaje natural, hoy en producción.</span>
+              <span class="lang-en">A GCP data platform over highly heterogeneous sources (web, XML, APIs), with layered data governance. On top of it, AI agents that answer questions in natural language, now in production.</span>
+            </p>
+            <ul class="chips">
+              <li>BigQuery</li><li>Airflow</li><li>Dataproc/Spark</li><li>GKE</li><li>Vertex AI</li><li>Gemini</li>
+            </ul>
+          </article>
+
+          <!-- Unilever (grande) -->
+          <article class="card case case-large">
+            <span class="case-client">Unilever</span>
+            <h3><span class="lang-es">4 años como equipo dedicado</span><span class="lang-en">4 years as a dedicated team</span></h3>
+            <p>
+              <span class="lang-es">Un equipo de 5 personas sobre una base de 500 tablas alimentada por distintos proveedores, incluida la migración de su ETL de Azure a GCP. Es el mismo equipo que trabaja hoy en Código Nativo.</span>
+              <span class="lang-en">A 5-person team on a 500-table database fed by multiple vendors, including the migration of their ETL from Azure to GCP. It is the same team working at Código Nativo today.</span>
+            </p>
+            <ul class="chips">
+              <li>Python</li><li>SQL</li><li>Airflow</li><li>BigQuery</li><li>Azure → GCP</li>
+            </ul>
+          </article>
+
+          <!-- Banca -->
+          <article class="card case">
+            <span class="case-client"><span class="lang-es">Banca</span><span class="lang-en">Banking</span></span>
+            <h3><span class="lang-es">Sistema multi-agente en producción</span><span class="lang-en">Multi-agent system in production</span></h3>
+            <p>
+              <span class="lang-es">Para analistas de riesgo y negocio. Cada respuesta cita su fuente o dice que no tiene datos, solo lee datos curados y anonimizados, y todo queda auditado.</span>
+              <span class="lang-en">For risk and business analysts. Every answer cites its source or says there is no data, it only reads curated and anonymized data, and everything is audited.</span>
+            </p>
+            <ul class="chips">
+              <li>Google ADK</li><li>Gemini</li><li>Vertex AI Agent Engine</li><li>BigQuery Vector Search</li>
+            </ul>
+          </article>
+
+          <!-- Whirlpool -->
+          <article class="card case">
+            <span class="case-client">Whirlpool</span>
+            <h3><span class="lang-es">Sell out unificado</span><span class="lang-en">Unified sell-out</span></h3>
+            <p>
+              <span class="lang-es">Unificamos el sell out de sus clientes, que llegaba en formatos dispares, y lo cruzamos con las ventas de SAP. Pasaron de informes mensuales a ventas actualizadas cada hora.</span>
+              <span class="lang-en">We unified their customers' sell-out data, which arrived in disparate formats, and joined it with SAP sales. They went from monthly reports to sales updated every hour.</span>
+            </p>
+            <ul class="chips">
+              <li>SAP</li><li>ETL</li><li>BI</li>
+            </ul>
+          </article>
+
+          <!-- Grupo Dota -->
+          <article class="card case">
+            <span class="case-client">Grupo Dota</span>
+            <h3><span class="lang-es">Modelos predictivos sobre 1.500 autobuses</span><span class="lang-en">Predictive models on 1,500 buses</span></h3>
+            <p>
+              <span class="lang-es">Predicción de consumo, stock y gastos, desgaste de neumáticos por marca y perfiles de riesgo de siniestralidad, sobre los datos operativos de la flota.</span>
+              <span class="lang-en">Forecasting of fuel consumption, stock and costs, tire wear by brand and accident-risk profiles, on the fleet's operational data.</span>
+            </p>
+            <ul class="chips">
+              <li>Machine Learning</li>
+              <li><span class="lang-es">Regresión</span><span class="lang-en">Regression</span></li>
+              <li>Random Forest</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         9. QUIÉN RESPONDE
+         ============================================================ -->
+    <section class="section reveal">
+      <div class="container about">
+        <div class="about-photo">
+          <!-- Dos imágenes iguales con distinto "alt" (texto alternativo), una por idioma.
+               El navegador descarga la foto una sola vez. -->
+          <img class="lang-es" src="assets/rodrigo-lauro.jpg" alt="Rodrigo Lauro, cofundador de Código Nativo" width="960" height="1280" loading="lazy">
+          <img class="lang-en" src="assets/rodrigo-lauro.jpg" alt="Rodrigo Lauro, co-founder of Código Nativo" width="960" height="1280" loading="lazy">
+        </div>
+        <div>
+          <span class="eyebrow">
+            <span class="lang-es">Quién responde</span>
+            <span class="lang-en">Who is accountable</span>
+          </span>
+          <h2 class="about-name">Rodrigo Lauro</h2>
+          <p class="about-role">
+            <span class="lang-es">Cofundador y responsable técnico</span>
+            <span class="lang-en">Co-founder and technical lead</span>
+          </p>
+          <p class="about-text">
+            <span class="lang-es">Ingeniero en Sistemas. Vivo en Madrid y puedo reunirme contigo en persona. El equipo trabaja desde Argentina con horario solapado con la jornada española.</span>
+            <span class="lang-en">Systems engineer. I live in Madrid and can meet you in person. The team works from Argentina with hours that overlap the Spanish working day.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         10. CONTACTO
+         El formulario se envía directo a Formspree, que te reenvía el mensaje por mail.
+         No hace falta JavaScript para enviarlo.
+         ============================================================ -->
+    <section class="section reveal" id="contacto">
+      <div class="container">
+        <div class="card contact-card">
+          <div class="section-header">
+            <span class="eyebrow">
+              <span class="lang-es">Contacto</span>
+              <span class="lang-en">Contact</span>
+            </span>
+            <h2>
+              <span class="lang-es">Cuéntanos qué perfiles necesitas</span>
+              <span class="lang-en">Tell us which profiles you need</span>
+            </h2>
+            <p>
+              <span class="lang-es">Te respondemos en menos de 24 horas laborables.</span>
+              <span class="lang-en">We reply within one business day.</span>
+            </p>
+          </div>
+
+          <!-- ⚠️ REEMPLAZAR "XXXX" por el código de tu formulario de Formspree
+               (ejemplo: https://formspree.io/f/mqkrabcd) -->
+          <form action="https://formspree.io/f/XXXX" method="POST">
+            <!-- Campo oculto: Formspree lo usa como asunto del mail que te llega -->
+            <input type="hidden" name="_subject" value="Contacto desde la web">
+
+            <!-- Cada campo tiene un <label> unido al input por el atributo "for" = "id" -->
+            <div class="field">
+              <label for="nombre"><span class="lang-es">Nombre</span><span class="lang-en">Name</span></label>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="empresa"><span class="lang-es">Empresa</span><span class="lang-en">Company</span></label>
+              <input type="text" id="empresa" name="empresa" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="mensaje"><span class="lang-es">¿Qué perfiles necesitas y para cuándo?</span><span class="lang-en">Which profiles do you need, and by when?</span></label>
+              <textarea id="mensaje" name="mensaje" required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">
+              <span class="lang-es">Enviar</span><span class="lang-en">Send</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       11. FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a class="brand" href="#">
+          <img src="assets/logo-simbolo.svg" alt="" width="35" height="44">
+          Código Nativo
+        </a>
+        <div class="footer-links">
+          <a href="mailto:rodrigo.lauro@codigonativo.com.ar">rodrigo.lauro@codigonativo.com.ar</a>
+          <a href="https://www.linkedin.com/company/codigo-nativo/" target="_blank" rel="noopener">LinkedIn</a>
+          <span>
+            <span class="lang-es">Meco (Madrid) · Buenos Aires</span>
+            <span class="lang-en">Meco (Madrid, Spain) · Buenos Aires, Argentina</span>
+          </span>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 Código Nativo</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+       JAVASCRIPT
+       ============================================================ */
+
+    /* ------------------------------------------------------------
+       1. CAMBIO DE IDIOMA
+       ------------------------------------------------------------ */
+
+    // Títulos de la pestaña en cada idioma
+    const titulos = {
+      es: 'Código Nativo — Equipos de Data e IA para consultoras',
+      en: 'Código Nativo — Data & AI teams for consultancies'
+    };
+
+    // Recibe 'es' o 'en' y muestra ese idioma
+    function cambiarIdioma(idioma) {
+      // Cambia la clase del body: el CSS se encarga de ocultar el otro idioma
+      document.body.classList.remove('show-es', 'show-en');
+      document.body.classList.add('show-' + idioma);
+
+      // Actualiza el atributo lang del <html> y el título de la pestaña
+      document.documentElement.lang = idioma;
+      document.title = titulos[idioma];
+
+      // Guarda la elección para la próxima visita.
+      // try/catch: si el navegador bloquea el guardado, la página sigue funcionando igual.
+      try {
+        localStorage.setItem('idioma', idioma);
+      } catch (error) {
+        // No hacemos nada: simplemente no se recuerda el idioma
+      }
+    }
+
+    // Al hacer clic en el botón ES / EN, pasa al idioma contrario al actual
+    document.getElementById('lang-switch').addEventListener('click', function () {
+      const idiomaActual = document.documentElement.lang;
+      cambiarIdioma(idiomaActual === 'es' ? 'en' : 'es');
+    });
+
+    // Al cargar la página, si había un idioma guardado, lo usamos
+    try {
+      const idiomaGuardado = localStorage.getItem('idioma');
+      if (idiomaGuardado === 'en') {
+        cambiarIdioma('en');
+      }
+    } catch (error) {
+      // Si no se puede leer, queda en español (el idioma por defecto)
+    }
+
+
+    /* ------------------------------------------------------------
+       2. ANIMACIÓN AL HACER SCROLL
+       IntersectionObserver "vigila" elementos y nos avisa cuando
+       entran en la pantalla. En ese momento les agregamos la clase
+       "visible" y el CSS hace el fundido.
+       ------------------------------------------------------------ */
+    const elementosAnimados = document.querySelectorAll('.reveal');
+
+    const observador = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (entrada) {
+        // isIntersecting = true cuando el elemento aparece en pantalla
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add('visible');
+          // Ya apareció: dejamos de vigilarlo (la animación ocurre una sola vez)
+          observador.unobserve(entrada.target);
+        }
+      });
+    }, {
+      threshold: 0.1   // se dispara cuando se ve al menos el 10% del elemento
+    });
+
+    elementosAnimados.forEach(function (elemento) {
+      observador.observe(elemento);
+    });
+  </script>
+</body>
+</html>
