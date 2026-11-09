@@ -13,16 +13,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Título de la pestaña y de los resultados de Google -->
-  <title>Código Nativo — Equipos de Data e IA para consultoras</title>
+  <title>Código Nativo | IA y datos en GCP</title>
   <!-- Descripción que muestra Google debajo del título -->
-  <meta name="description" content="Equipos de Data e IA para consultoras que ganaron un contrato y no tienen gente. Un equipo que lleva años trabajando junto, con un responsable técnico como único interlocutor.">
+  <meta name="description" content="Agentes de IA y RAG en producción sobre GCP. Nos hacemos cargo del agente, el RAG o los pipelines de datos que lo sostienen, con un solo interlocutor técnico en Madrid.">
 
   <!-- Open Graph: lo que muestran LinkedIn y WhatsApp al compartir el link.
        La imagen tiene que ser una dirección completa (con https://), por eso apunta al dominio. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Código Nativo">
-  <meta property="og:title" content="Código Nativo — Equipos de Data e IA para consultoras">
-  <meta property="og:description" content="Un equipo de Data e IA que lleva años trabajando junto, con un responsable técnico como único interlocutor. Dentro de tus procesos y bajo tu marca.">
+  <meta property="og:title" content="Código Nativo | IA y datos en GCP">
+  <meta property="og:description" content="Agentes de IA y RAG en producción sobre GCP. Respondemos por el resultado, con un solo interlocutor técnico en Madrid.">
   <meta property="og:url" content="https://codigonativo.com.ar/">
   <meta property="og:image" content="https://codigonativo.com.ar/assets/og-image.png">
   <meta property="og:image:width" content="618">
@@ -487,16 +487,16 @@
 
     /* ============================================================
        11. CASOS
-       La grilla tiene 6 columnas: las 2 primeras tarjetas ocupan 3 cada una
-       (mitad y mitad) y las otras 3 ocupan 2 cada una (un tercio).
+       La grilla tiene 2 columnas: todas las tarjetas ocupan la mitad del ancho
+       y la última (la 5ª, que queda sola) ocupa el ancho completo.
        ============================================================ */
     .cases-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
     }
-    .case { grid-column: span 2; display: flex; flex-direction: column; }
-    .case-large { grid-column: span 3; }
+    .case { display: flex; flex-direction: column; }
+    .case:last-child { grid-column: span 2; }       /* la 5ª tarjeta ocupa todo el ancho */
     .case .chips { margin-top: auto; padding-top: 20px; }  /* chips siempre abajo */
     .case-client {
       display: block;
@@ -646,9 +646,6 @@
     @media (max-width: 900px) {
       .nav { display: none; }                         /* se ocultan los enlaces del centro */
       .grid-3 { grid-template-columns: 1fr; }
-      .cases-grid { grid-template-columns: repeat(2, 1fr); }
-      .case, .case-large { grid-column: span 1; }
-      .case:last-child { grid-column: span 2; }       /* la 5ª tarjeta ocupa todo el ancho */
       .about { grid-template-columns: 240px 1fr; gap: 40px; }
     }
 
@@ -713,7 +710,7 @@
 
       <nav class="nav" aria-label="Principal">
         <a href="#como-trabajamos"><span class="lang-es">Cómo trabajamos</span><span class="lang-en">How we work</span></a>
-        <a href="#perfiles"><span class="lang-es">Perfiles</span><span class="lang-en">Profiles</span></a>
+        <a href="#que-hacemos"><span class="lang-es">Qué hacemos</span><span class="lang-en">What we do</span></a>
         <a href="#casos"><span class="lang-es">Casos</span><span class="lang-en">Case studies</span></a>
         <a href="#contacto"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a>
       </nav>
@@ -753,21 +750,21 @@
 
       <div class="container">
         <span class="eyebrow">
-          <span class="lang-es">Equipos de Data e IA para consultoras</span>
-          <span class="lang-en">Data &amp; AI teams for consultancies</span>
+          <span class="lang-es">IA y datos en GCP</span>
+          <span class="lang-en">AI and data on GCP</span>
         </span>
         <h1>
-          <span class="lang-es">¿Ganaste el contrato y te falta gente de datos?</span>
-          <span class="lang-en">Won the contract but short on data people?</span>
+          <span class="lang-es">Agentes de IA y RAG en producción sobre GCP. Respondemos por el resultado.</span>
+          <span class="lang-en">AI agents and RAG in production on GCP. We are accountable for the outcome.</span>
         </h1>
         <p class="hero-subtitle">
-          <span class="lang-es">Te damos un equipo de Data e IA que lleva años trabajando junto, con un responsable técnico como único interlocutor. Dentro de tus procesos y bajo tu marca.</span>
-          <span class="lang-en">We give you a Data &amp; AI team that has worked together for years, with one technical lead as your single point of contact. Inside your processes and under your brand.</span>
+          <span class="lang-es">Nos hacemos cargo de una parte concreta de tu proyecto: el agente, el RAG o los pipelines de datos que lo sostienen. Un solo interlocutor técnico en Madrid, trabajo dentro de tus herramientas y un equipo que ejecuta desde Argentina con horario solapado.</span>
+          <span class="lang-en">We take ownership of a specific part of your project: the agent, the RAG system or the data pipelines behind it. One technical point of contact in Madrid, work inside your tools, and a team delivering from Argentina with overlapping hours.</span>
         </p>
         <div class="hero-buttons">
           <a class="btn btn-primary" href="#contacto">
-            <span class="lang-es">Cuéntanos qué perfiles necesitas</span>
-            <span class="lang-en">Tell us which profiles you need</span>
+            <span class="lang-es">Cuéntanos el proyecto</span>
+            <span class="lang-en">Tell us about the project</span>
           </a>
           <a class="btn btn-secondary" href="#casos">
             <span class="lang-es">Ver casos</span>
@@ -801,42 +798,38 @@
             <span class="lang-en">Why us</span>
           </span>
           <h2>
-            <span class="lang-es">Contratar lleva meses. Tu cliente no espera.</span>
-            <span class="lang-en">Hiring takes months. Your client won't wait.</span>
+            <span class="lang-es">Muchos proyectos de IA no pasan del piloto. Casi nunca es el modelo: son los datos que hay debajo.</span>
+            <span class="lang-en">Many AI projects never get past the pilot. It is rarely the model: it is the data underneath.</span>
           </h2>
-          <p>
-            <span class="lang-es">Una bolsa de freelancers te deja a ti gestionando personas sueltas frente a tu cliente. Nosotros te damos un equipo.</span>
-            <span class="lang-en">A pool of freelancers leaves you managing loose individuals in front of your client. We give you a team.</span>
-          </p>
         </div>
 
         <div class="grid grid-2">
           <div class="card">
-            <h3><span class="lang-es">Un equipo, no personas sueltas</span><span class="lang-en">A team, not individuals</span></h3>
+            <h3><span class="lang-es">Un responsable, no personas sueltas</span><span class="lang-en">One accountable lead, not loose individuals</span></h3>
             <p>
-              <span class="lang-es">Llevamos años trabajando juntos en los mismos proyectos. No pierdes semanas en que se conozcan.</span>
-              <span class="lang-en">We have worked together on the same projects for years. No weeks lost getting to know each other.</span>
+              <span class="lang-es">Hablas con una persona que responde por la entrega. Quién la ejecuta es asunto nuestro.</span>
+              <span class="lang-en">You talk to one person who is accountable for the delivery. Who does the work is our concern.</span>
             </p>
           </div>
           <div class="card">
-            <h3><span class="lang-es">Un solo interlocutor técnico</span><span class="lang-en">One technical point of contact</span></h3>
+            <h3><span class="lang-es">Dentro de tus procesos</span><span class="lang-en">Inside your processes</span></h3>
             <p>
-              <span class="lang-es">Un responsable técnico con nombre responde por el equipo y por la entrega.</span>
-              <span class="lang-en">A named technical lead is accountable for the team and the delivery.</span>
+              <span class="lang-es">Tu Jira, tu repositorio, tus code reviews. Ves todo, todo el tiempo.</span>
+              <span class="lang-en">Your Jira, your repo, your code reviews. You see everything, all the time.</span>
+            </p>
+          </div>
+          <div class="card">
+            <h3><span class="lang-es">Entregas cortas</span><span class="lang-en">Short delivery cycles</span></h3>
+            <p>
+              <span class="lang-es">Algo demostrable cada semana y un reporte breve de avance y riesgos.</span>
+              <span class="lang-en">Something you can demo every week, plus a brief report on progress and risks.</span>
             </p>
           </div>
           <div class="card">
             <h3><span class="lang-es">Reemplazos a nuestro cargo</span><span class="lang-en">Replacements on us</span></h3>
             <p>
-              <span class="lang-es">Si alguien sale, lo reemplazamos nosotros, sin coste para ti.</span>
-              <span class="lang-en">If someone leaves, we replace them at no cost to you.</span>
-            </p>
-          </div>
-          <div class="card">
-            <h3><span class="lang-es">Bajo tu marca</span><span class="lang-en">Under your brand</span></h3>
-            <p>
-              <span class="lang-es">Tu Jira, tu repositorio, tus code reviews, tu definición de terminado. Para tu cliente, somos parte de tu equipo.</span>
-              <span class="lang-en">Your Jira, your repo, your code reviews, your definition of done. To your client, we are part of your team.</span>
+              <span class="lang-es">Si alguien sale, lo cubrimos nosotros, sin coste para ti.</span>
+              <span class="lang-en">If someone leaves, we cover it, at no cost to you.</span>
             </p>
           </div>
         </div>
@@ -844,7 +837,7 @@
     </section>
 
     <!-- ============================================================
-         5. FORMATOS
+         5. CÓMO TRABAJAMOS (los tres formatos)
          ============================================================ -->
     <section class="section reveal" id="como-trabajamos">
       <div class="container">
@@ -854,30 +847,39 @@
             <span class="lang-en">How we work</span>
           </span>
           <h2>
-            <span class="lang-es">Dos formas de trabajar con nosotros</span>
-            <span class="lang-en">Two ways to work with us</span>
+            <span class="lang-es">Tres formas de trabajar con nosotros</span>
+            <span class="lang-en">Three ways to work with us</span>
           </h2>
         </div>
 
-        <div class="grid grid-2">
+        <div class="grid grid-3">
           <!-- Tarjeta destacada -->
           <div class="card card-featured">
             <div class="card-title-row">
-              <h3><span class="lang-es">Equipo dedicado</span><span class="lang-en">Dedicated team</span></h3>
-              <span class="tag"><span class="lang-es">Principal</span><span class="lang-en">Main</span></span>
+              <h3><span class="lang-es">Paquete cerrado</span><span class="lang-en">Fixed package</span></h3>
+              <span class="tag"><span class="lang-es">Para empezar</span><span class="lang-en">To start</span></span>
             </div>
             <p>
-              <span class="lang-es">De 1 a 4 personas por mes, responsable técnico incluido. Mínimo 3 meses.</span>
-              <span class="lang-en">1 to 4 people per month, technical lead included. 3-month minimum.</span>
+              <span class="lang-es">Entregable definido, precio fijo, fecha y pago por hito.</span>
+              <span class="lang-en">Defined deliverable, fixed price, set date and payment per milestone.</span>
             </p>
           </div>
           <div class="card">
             <div class="card-title-row">
-              <h3><span class="lang-es">Alcance cerrado</span><span class="lang-en">Fixed scope</span></h3>
+              <h3><span class="lang-es">Equipo dedicado</span><span class="lang-en">Dedicated team</span></h3>
             </div>
             <p>
-              <span class="lang-es">Entregable definido, precio fijo y fecha. Ideal para un primer proyecto.</span>
-              <span class="lang-en">Defined deliverable, fixed price and date. Ideal for a first project.</span>
+              <span class="lang-es">De 1 a 3 personas por mes, con responsable técnico. Mínimo 3 meses.</span>
+              <span class="lang-en">1 to 3 people per month, with a technical lead. 3-month minimum.</span>
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-title-row">
+              <h3><span class="lang-es">Soporte y evolución mensual</span><span class="lang-en">Monthly support and evolution</span></h3>
+            </div>
+            <p>
+              <span class="lang-es">Mantenemos tu plataforma de datos en marcha: monitorización, corrección de errores y cambios. Bolsa de horas mensual, sin depender de una sola persona.</span>
+              <span class="lang-en">We keep your data platform running: monitoring, fixing failures and making changes. A monthly block of hours, without depending on a single person.</span>
             </p>
           </div>
         </div>
@@ -885,58 +887,62 @@
     </section>
 
     <!-- ============================================================
-         6. PERFILES
+         6. QUÉ HACEMOS (4 tarjetas en 2 columnas, cada una con chips de tecnologías)
          ============================================================ -->
-    <section class="section reveal" id="perfiles">
+    <section class="section reveal" id="que-hacemos">
       <div class="container">
         <div class="section-header">
           <span class="eyebrow">
-            <span class="lang-es">Perfiles</span>
-            <span class="lang-en">Profiles</span>
+            <span class="lang-es">Qué hacemos</span>
+            <span class="lang-en">What we do</span>
           </span>
           <h2>
-            <span class="lang-es">Los perfiles que sumamos a tu proyecto</span>
-            <span class="lang-en">The profiles we add to your project</span>
+            <span class="lang-es">De qué podemos hacernos cargo en tu proyecto</span>
+            <span class="lang-en">What we can take ownership of in your project</span>
           </h2>
         </div>
 
-        <div class="grid grid-3">
+        <div class="grid grid-2">
           <div class="card">
-            <h3>Data Engineer</h3>
+            <h3><span class="lang-es">Agentes de IA</span><span class="lang-en">AI agents</span></h3>
             <p>
-              <span class="lang-es">Pipelines de datos fiables, de la ingesta al modelo listo para consumir.</span>
-              <span class="lang-en">Reliable data pipelines, from ingestion to consumption-ready models.</span>
+              <span class="lang-es">Agentes y sistemas multiagente con respuestas trazables y fuentes citadas.</span>
+              <span class="lang-en">Agents and multi-agent systems with traceable answers and cited sources.</span>
             </p>
             <ul class="chips">
-              <li>Python</li><li>SQL</li><li>Airflow</li><li>dbt</li><li>BigQuery</li><li>Cloud SQL</li>
+              <li>Vertex AI</li><li>Gemini</li><li>Google ADK</li>
+              <li><span class="lang-es">Sistemas multiagente</span><span class="lang-en">Multi-agent systems</span></li>
             </ul>
           </div>
           <div class="card">
-            <h3>Cloud / Data Architect</h3>
+            <h3><span class="lang-es">RAG sobre tus datos</span><span class="lang-en">RAG on your data</span></h3>
             <p>
-              <span class="lang-es">Diseño de plataformas de datos, migraciones y gobierno del dato.</span>
-              <span class="lang-en">Data platform design, migrations and data governance.</span>
+              <span class="lang-es">Consulta en lenguaje natural sobre documentos y BigQuery, con evaluación de respuestas.</span>
+              <span class="lang-en">Natural-language queries over documents and BigQuery, with answer evaluation.</span>
             </p>
             <ul class="chips">
-              <li>GCP</li>
-              <li><span class="lang-es">Migraciones Azure → GCP</span><span class="lang-en">Azure → GCP migrations</span></li>
-              <li>Kubernetes</li>
-              <li><span class="lang-es">Modelado</span><span class="lang-en">Data modeling</span></li>
-              <li><span class="lang-es">Gobierno del dato</span><span class="lang-en">Data governance</span></li>
+              <li>RAG</li><li>BigQuery Vector Search</li><li>Python</li><li>Text-to-SQL</li>
             </ul>
           </div>
           <div class="card">
-            <h3>AI Engineer</h3>
+            <h3><span class="lang-es">Pipelines de datos</span><span class="lang-en">Data pipelines</span></h3>
             <p>
-              <span class="lang-es">IA en producción sobre datos gobernados.</span>
-              <span class="lang-en">Production AI on top of governed data.</span>
+              <span class="lang-es">Ingesta, orquestación y modelado, hasta el cuadro de mando en Looker, Power BI o Tableau: la base que necesita cualquier sistema de IA.</span>
+              <span class="lang-en">Ingestion, orchestration and modeling, all the way to dashboards in Looker, Power BI or Tableau: the foundation every AI system needs.</span>
             </p>
             <ul class="chips">
-              <li>RAG</li>
-              <li><span class="lang-es">Sistemas multi-agente</span><span class="lang-en">Multi-agent systems</span></li>
-              <li>Vertex AI</li>
-              <li><span class="lang-es">Apps con LLM</span><span class="lang-en">LLM apps</span></li>
-              <li><span class="lang-es">Modelos predictivos</span><span class="lang-en">Predictive models</span></li>
+              <li>Cloud Composer</li><li>Airflow</li><li>Dataflow</li><li>Pub/Sub</li><li>BigQuery</li>
+              <li>Looker</li><li>Power BI</li><li>Tableau</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3><span class="lang-es">Migración a GCP</span><span class="lang-en">Migration to GCP</span></h3>
+            <p>
+              <span class="lang-es">De on-premise o Azure a BigQuery, con infraestructura como código.</span>
+              <span class="lang-en">From on-premises or Azure to BigQuery, with infrastructure as code.</span>
+            </p>
+            <ul class="chips">
+              <li>Azure → GCP</li><li>Terraform</li><li>Kubernetes</li>
             </ul>
           </div>
         </div>
@@ -963,26 +969,26 @@
         <ol class="grid grid-3" style="list-style: none; padding: 0; margin: 0;">
           <li class="card">
             <span class="step-number" aria-hidden="true">01</span>
-            <h3><span class="lang-es">Nos cuentas el proyecto</span><span class="lang-en">Tell us about the project</span></h3>
+            <h3><span class="lang-es">Diagnóstico inicial</span><span class="lang-en">Initial assessment</span></h3>
             <p>
-              <span class="lang-es">Contrato, stack, plazo y perfiles que te faltan.</span>
-              <span class="lang-en">Contract, stack, timeline and the profiles you are missing.</span>
+              <span class="lang-es">Dos o tres días revisando tu caso, con un documento de hallazgos.</span>
+              <span class="lang-en">Two or three days reviewing your case, with a findings document.</span>
             </p>
           </li>
           <li class="card">
             <span class="step-number" aria-hidden="true">02</span>
-            <h3><span class="lang-es">Tu arquitecto entrevista al equipo</span><span class="lang-en">Your architect interviews the team</span></h3>
+            <h3><span class="lang-es">Piloto de 4 semanas</span><span class="lang-en">4-week pilot</span></h3>
             <p>
-              <span class="lang-es">Antes de arrancar, conoces a quienes van a trabajar contigo.</span>
-              <span class="lang-en">Before we start, you meet the people who will work with you.</span>
+              <span class="lang-es">Revisión a los 15 días con un entregable definido por escrito. Si no encaja, lo dejamos ahí.</span>
+              <span class="lang-en">A review at day 15, against a deliverable defined in writing. If it is not a fit, we stop there.</span>
             </p>
           </li>
           <li class="card">
             <span class="step-number" aria-hidden="true">03</span>
-            <h3><span class="lang-es">Arrancamos con una revisión a las dos semanas</span><span class="lang-en">We start with a two-week review</span></h3>
+            <h3><span class="lang-es">Pago por hito</span><span class="lang-en">Payment per milestone</span></h3>
             <p>
-              <span class="lang-es">Empezamos por un alcance acotado. Si no encaja, lo dejamos ahí.</span>
-              <span class="lang-en">We begin with a limited scope. If it is not a fit, we stop there.</span>
+              <span class="lang-es">Pagas lo que ya viste.</span>
+              <span class="lang-en">You pay for what you have already seen.</span>
             </p>
           </li>
         </ol>
@@ -1006,8 +1012,8 @@
         </div>
 
         <div class="cases-grid">
-          <!-- Ayesa (grande) -->
-          <article class="card case case-large">
+          <!-- Ayesa -->
+          <article class="card case">
             <span class="case-client">Ayesa</span>
             <h3><span class="lang-es">Datos e IA para el sector público</span><span class="lang-en">Data and AI for the public sector</span></h3>
             <p>
@@ -1019,29 +1025,29 @@
             </ul>
           </article>
 
-          <!-- Unilever (grande) -->
-          <article class="card case case-large">
-            <span class="case-client">Unilever</span>
-            <h3><span class="lang-es">4 años como equipo dedicado</span><span class="lang-en">4 years as a dedicated team</span></h3>
-            <p>
-              <span class="lang-es">Un equipo de 5 personas sobre una base de 500 tablas alimentada por distintos proveedores, incluida la migración de su ETL de Azure a GCP. Es el mismo equipo que trabaja hoy en Código Nativo.</span>
-              <span class="lang-en">A 5-person team on a 500-table database fed by multiple vendors, including the migration of their ETL from Azure to GCP. It is the same team working at Código Nativo today.</span>
-            </p>
-            <ul class="chips">
-              <li>Python</li><li>SQL</li><li>Airflow</li><li>BigQuery</li><li>Azure → GCP</li>
-            </ul>
-          </article>
-
           <!-- Banca -->
           <article class="card case">
             <span class="case-client"><span class="lang-es">Banca</span><span class="lang-en">Banking</span></span>
-            <h3><span class="lang-es">Sistema multi-agente en producción</span><span class="lang-en">Multi-agent system in production</span></h3>
+            <h3><span class="lang-es">Sistema multiagente en producción</span><span class="lang-en">Multi-agent system in production</span></h3>
             <p>
               <span class="lang-es">Para analistas de riesgo y negocio. Cada respuesta cita su fuente o dice que no tiene datos, solo lee datos curados y anonimizados, y todo queda auditado.</span>
               <span class="lang-en">For risk and business analysts. Every answer cites its source or says there is no data, it only reads curated and anonymized data, and everything is audited.</span>
             </p>
             <ul class="chips">
               <li>Google ADK</li><li>Gemini</li><li>Vertex AI Agent Engine</li><li>BigQuery Vector Search</li>
+            </ul>
+          </article>
+
+          <!-- Unilever -->
+          <article class="card case">
+            <span class="case-client">Unilever</span>
+            <h3><span class="lang-es">4 años como equipo dedicado</span><span class="lang-en">4 years as a dedicated team</span></h3>
+            <p>
+              <span class="lang-es">Un equipo de 5 personas sobre una base de 500 tablas alimentada por distintos proveedores, incluida la migración de su ETL de Azure a GCP. Parte de ese equipo trabaja hoy en Código Nativo.</span>
+              <span class="lang-en">A 5-person team on a 500-table database fed by multiple vendors, including the migration of their ETL from Azure to GCP. Part of that team works at Código Nativo today.</span>
+            </p>
+            <ul class="chips">
+              <li>Python</li><li>SQL</li><li>Airflow</li><li>BigQuery</li><li>Azure → GCP</li><li>Power BI</li>
             </ul>
           </article>
 
@@ -1054,7 +1060,7 @@
               <span class="lang-en">We unified their customers' sell-out data, which arrived in disparate formats, and joined it with SAP sales. They went from monthly reports to sales updated every hour.</span>
             </p>
             <ul class="chips">
-              <li>SAP</li><li>ETL</li><li>BI</li>
+              <li>SAP</li><li>ETL</li><li>Tableau</li>
             </ul>
           </article>
 
@@ -1078,8 +1084,9 @@
 
     <!-- ============================================================
          9. QUIÉN RESPONDE
+         Oculta por ahora. Para volver a mostrarla, borrar style="display:none".
          ============================================================ -->
-    <section class="section reveal">
+    <section class="section reveal" style="display:none">
       <div class="container about">
         <div class="about-photo">
           <!-- Dos imágenes iguales con distinto "alt" (texto alternativo), una por idioma.
@@ -1098,8 +1105,8 @@
             <span class="lang-en">Co-founder and technical lead</span>
           </p>
           <p class="about-text">
-            <span class="lang-es">Ingeniero en Sistemas. Vivo en Madrid y puedo reunirme contigo en persona. El equipo trabaja desde Argentina con horario solapado con la jornada española.</span>
-            <span class="lang-en">Systems engineer. I live in Madrid and can meet you in person. The team works from Argentina with hours that overlap the Spanish working day.</span>
+            <span class="lang-es">Ingeniero en Sistemas, especialización en Inteligencia Artificial (UBA). Estoy en Madrid: cada proyecto empieza con una reunión en persona y respondo por cada entrega. Si tu arquitecto quiere entrevistarme antes de empezar, encantado. El equipo trabaja desde Argentina con horario solapado con la jornada española.</span>
+            <span class="lang-en">Systems Engineer, specialized in Artificial Intelligence (UBA). I am based in Madrid: every project starts with an in-person meeting, and I am accountable for every delivery. If your architect wants to interview me before we start, I am happy to meet them. The team works from Argentina with hours that overlap the Spanish working day.</span>
           </p>
         </div>
       </div>
@@ -1119,12 +1126,12 @@
               <span class="lang-en">Contact</span>
             </span>
             <h2>
-              <span class="lang-es">Cuéntanos qué perfiles necesitas</span>
-              <span class="lang-en">Tell us which profiles you need</span>
+              <span class="lang-es">Cuéntanos el proyecto</span>
+              <span class="lang-en">Tell us about the project</span>
             </h2>
             <p>
-              <span class="lang-es">Te respondemos en menos de 24 horas laborables.</span>
-              <span class="lang-en">We reply within one business day.</span>
+              <span class="lang-es">Qué hay que construir, en qué plazo y con qué stack. Te respondemos en 24 horas.</span>
+              <span class="lang-en">What needs to be built, by when and on which stack. We reply within 24 hours.</span>
             </p>
           </div>
 
@@ -1148,7 +1155,7 @@
               <input type="email" id="email" name="email" autocomplete="email" required>
             </div>
             <div class="field">
-              <label for="mensaje"><span class="lang-es">¿Qué perfiles necesitas y para cuándo?</span><span class="lang-en">Which profiles do you need, and by when?</span></label>
+              <label for="mensaje"><span class="lang-es">¿Qué hay que construir y para cuándo?</span><span class="lang-en">What needs to be built, and by when?</span></label>
               <textarea id="mensaje" name="mensaje" required></textarea>
             </div>
             <button class="btn btn-primary" type="submit">
@@ -1195,8 +1202,8 @@
 
     // Títulos de la pestaña en cada idioma
     const titulos = {
-      es: 'Código Nativo — Equipos de Data e IA para consultoras',
-      en: 'Código Nativo — Data & AI teams for consultancies'
+      es: 'Código Nativo | IA y datos en GCP',
+      en: 'Código Nativo | AI and data on GCP'
     };
 
     // Recibe 'es' o 'en' y muestra ese idioma

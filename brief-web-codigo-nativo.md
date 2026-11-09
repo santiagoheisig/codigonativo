@@ -1,13 +1,17 @@
-# Brief — Landing de Código Nativo (codigonativo.com.ar)
+# Brief: Landing de Código Nativo (codigonativo.com.ar)
 
 Este archivo tiene dos partes:
 
-- **Parte 1 — Para Rodrigo:** cómo armar el proyecto desde cero en VS Code y cómo pasárselo a Claude.
-- **Parte 2 — Para Claude:** qué construir, con qué diseño y con qué textos (español e inglés).
+- **Parte 1, para Rodrigo:** cómo armar el proyecto desde cero en VS Code y cómo pasárselo a Claude.
+- **Parte 2, para Claude:** qué construir, con qué diseño y con qué textos (español e inglés).
+
+Versión 2: el mensaje pasa de "equipos de Data e IA para consultoras" a "agentes de IA y RAG en producción sobre GCP".
+
+**Regla de escritura:** nunca usar el guion largo (el carácter de raya) en ningún texto, ni en la web, ni en comentarios, ni en este archivo.
 
 ---
 
-# PARTE 1 — PARA RODRIGO
+# PARTE 1: PARA RODRIGO
 
 ## Paso 1. Instalar lo necesario
 
@@ -92,20 +96,18 @@ Cuando esté publicada: **volvé a poner `codigonativo.com.ar` en la página de 
 
 ## Pendientes que tenés que confirmar antes de publicar
 
-Estos datos están en los textos y todavía no los confirmaste. Si alguno no es cierto, decile a Claude que lo saque:
-
-1. **Unilever:** si la migración de Azure a GCP fue parte de los 4 años. El texto actual dice "incluida la migración", que asume que sí.
-2. **Horario solapado con España:** que el equipo en Argentina pueda trabajar con varias horas en común con la jornada española.
-3. **Teléfono:** no puse ninguno. Si tenés número español, se puede agregar en el contacto.
-4. **Link a la página de LinkedIn de la empresa:** pasale a Claude la dirección pública (la que ves en "Ver como miembro").
+1. **Formspree:** el formulario todavía apunta a `https://formspree.io/f/XXXX`. Hay que reemplazar `XXXX` por tu código.
+2. **Unilever:** si la migración de Azure a GCP fue parte de los 4 años. El texto actual dice "incluida la migración", que asume que sí.
+3. **Horario solapado con España:** que el equipo en Argentina pueda trabajar con varias horas en común con la jornada española.
+4. **Teléfono:** no hay ninguno. Si tenés número español, se puede agregar en el contacto.
 
 ---
 
-# PARTE 2 — PARA CLAUDE
+# PARTE 2: PARA CLAUDE
 
 ## Contexto
 
-Código Nativo es una empresa argentina de 4 personas que ofrece **equipos de Data e IA a consultoras españolas** de desarrollo y datos (20 a 200 personas) que ganaron contratos y no tienen gente. El lector de la web es un Business Manager, Delivery Manager o responsable de práctica de una consultora. Su miedo no es técnico: es quedar mal frente a su propio cliente. La web tiene que transmitir seriedad, bajo riesgo y un equipo real.
+Código Nativo es una empresa argentina de 4 personas que se hace cargo de **una parte concreta de un proyecto de IA sobre GCP**: el agente, el RAG o los pipelines de datos que lo sostienen. El lector de la web es un Business Manager, Delivery Manager o responsable de práctica de una consultora española. Su miedo no es técnico: es quedar mal frente a su propio cliente. La web tiene que transmitir seriedad, bajo riesgo y que hay alguien que responde por el resultado.
 
 ## Cómo trabajar con Rodrigo (obligatorio)
 
@@ -114,6 +116,8 @@ Código Nativo es una empresa argentina de 4 personas que ofrece **equipos de Da
 - **Comentarios en español** dentro del código, explicando qué hace cada sección del HTML, cada bloque importante del CSS y cada función del JavaScript.
 - Antes de ejecutar cualquier comando o crear archivos, decile qué vas a hacer y para qué, y recordale que también lo puede hacer a mano.
 - Antes de escribir código, proponé en pocas líneas cómo vas a armar la página y esperá su OK.
+- No hacer commit ni publicar nada sin preguntarle.
+- Nunca usar el guion largo.
 
 ## Requisitos técnicos
 
@@ -125,7 +129,13 @@ Código Nativo es una empresa argentina de 4 personas que ofrece **equipos de Da
 - **SEO y vista previa al compartir:** `<title>`, `<meta name="description">` y etiquetas Open Graph (`og:title`, `og:description`, `og:image` apuntando a `assets/og-image.png`, `og:url`). Importante: la web se va a compartir en LinkedIn y tiene que mostrar una vista previa correcta.
 - **Favicon:** usar `assets/logo-simbolo.svg` con `<link rel="icon" type="image/svg+xml">`.
 
-## Diseño — Dirección "oscuro con brillos", monocromo
+### Título y descripción
+
+- Título ES: Código Nativo | IA y datos en GCP
+- Título EN: Código Nativo | AI and data on GCP
+- Description: Agentes de IA y RAG en producción sobre GCP. Nos hacemos cargo del agente, el RAG o los pipelines de datos que lo sostienen, con un solo interlocutor técnico en Madrid.
+
+## Diseño: dirección "oscuro con brillos", monocromo
 
 Referencia de estilo: **linear.app** (inspiración, no copia). Fondo casi negro, tipografía blanca grande con ligero degradado, brillos de luz suaves detrás de las secciones clave, tarjetas con bordes finos y semitransparentes.
 
@@ -154,7 +164,7 @@ Como no hay color, el contraste se logra con **intensidad**: blanco puro para lo
 - Título principal (h1): `font-size: clamp(2.5rem, 6vw, 4.5rem)`, `letter-spacing: -0.03em`, peso 700, con degradado de blanco a gris claro aplicado al texto.
 - Títulos de sección (h2): `clamp(1.75rem, 4vw, 2.75rem)`, `letter-spacing: -0.02em`.
 - Texto normal: 1rem a 1.125rem, `line-height: 1.6`, color `--text-muted`.
-- Etiqueta pequeña sobre los títulos ("eyebrow"): mayúsculas, 0.8rem, `letter-spacing: 0.08em`, color `--accent`.
+- Etiqueta pequeña sobre los títulos ("eyebrow"): mayúsculas (con CSS, el texto se escribe normal), 0.8rem, `letter-spacing: 0.08em`, color `--accent`.
 
 ### Espaciado y layout
 
@@ -166,7 +176,7 @@ Como no hay color, el contraste se logra con **intensidad**: blanco puro para lo
 ### Efectos
 
 - **Brillo del hero:** un degradado radial blanco muy suave (`--accent-soft`) arriba del título, que se desvanece hacia los costados.
-- **Puntos de luz:** opcionalmente, algunos puntos blancos pequeños y tenues dispersos en el fondo del hero, evocando el banner de la marca. Con CSS simple, sin canvas ni librerías.
+- **Puntos de luz:** algunos puntos blancos pequeños y tenues dispersos en el fondo del hero, evocando el banner de la marca. Con CSS simple, sin canvas ni librerías.
 - **Grilla sutil:** detrás del hero, líneas finas de grilla casi invisibles que se desvanecen hacia los bordes (con `mask-image`).
 - **Animación al hacer scroll:** las secciones aparecen con un fundido suave y un pequeño desplazamiento hacia arriba. Usar `IntersectionObserver` con código simple y comentado. Sin librerías.
 - **Nada exagerado:** el brillo es un acompañamiento, no el protagonista. El contenido tiene que leerse perfecto.
@@ -175,15 +185,13 @@ Como no hay color, el contraste se logra con **intensidad**: blanco puro para lo
 
 - Fijo arriba (`position: sticky`), con fondo semitransparente y desenfoque (`backdrop-filter: blur`).
 - A la izquierda: logo + "Código Nativo".
-- Al centro (solo escritorio): enlaces a Cómo trabajamos, Perfiles, Casos y Contacto.
+- Al centro (solo escritorio): enlaces a Cómo trabajamos, Qué hacemos, Casos y Contacto.
 - A la derecha: botón **ES / EN** y botón principal "Contacto".
 - En celular: se ocultan los enlaces del centro; quedan logo, ES/EN y el botón de contacto.
 
-### Logo — crear `assets/logo-simbolo.svg`
+### Logo: `assets/logo-simbolo.svg`
 
 El símbolo de la marca es un **óvalo vertical con una línea vertical que lo divide por la mitad**, de arriba abajo. Trazo blanco, sin relleno, con grosor de trazo de aproximadamente el 7% del ancho. Proporción aproximada: alto = 1,24 × ancho.
-
-Crear el archivo `assets/logo-simbolo.svg` con algo equivalente a esto:
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 124">
@@ -192,9 +200,7 @@ Crear el archivo `assets/logo-simbolo.svg` con algo equivalente a esto:
 </svg>
 ```
 
-- Explicale a Rodrigo línea por línea qué significa (`viewBox`, `ellipse`, `cx/cy`, `rx/ry`, `stroke`, `line`).
-- Mostrale el resultado y preguntale si coincide con su logo; ajustar proporciones si hace falta.
-- Usarlo en el header (unos 28-32 px de alto) y en el footer (más grande), siempre seguido del texto "Código Nativo" en Inter, peso 500.
+- Usarlo en el header (unos 28 a 32 px de alto) y en el footer (más grande), siempre seguido del texto "Código Nativo" en Inter, peso 500.
 - Usarlo también como favicon.
 
 ## Cambio de idioma español / inglés
@@ -206,18 +212,16 @@ Implementarlo de la forma **más simple de entender**:
 - Con CSS se oculta el idioma que no corresponde: `.show-es .lang-en { display: none; }` y `.show-en .lang-es { display: none; }`.
 - El botón ES/EN cambia la clase del `<body>` y actualiza el atributo `lang` del `<html>`.
 - Idioma por defecto: español.
-- Opcional: recordar la elección con `localStorage`, siempre dentro de `try/catch` para que la página funcione aunque el navegador lo bloquee.
+- Recordar la elección con `localStorage`, siempre dentro de `try/catch` para que la página funcione aunque el navegador lo bloquee.
 
 ## Estructura de la página
-
-Estructura inspirada en cómo **toptal.com** presenta su servicio: problema → por qué nosotros → qué ofrecemos → cómo empezamos → pruebas → contacto.
 
 1. Header
 2. Hero
 3. Franja de clientes
 4. Por qué nosotros
-5. Formatos
-6. Perfiles
+5. Cómo trabajamos
+6. Qué hacemos
 7. Cómo empezamos
 8. Casos
 9. Quién responde (foto de Rodrigo)
@@ -226,99 +230,101 @@ Estructura inspirada en cómo **toptal.com** presenta su servicio: problema → 
 
 ## Textos
 
-Español de España con tuteo (no voseo). No cambiar el sentido de los textos. Se pueden hacer ajustes menores de longitud si el diseño lo pide, avisando a Rodrigo.
+Español de España con tuteo (no voseo). No cambiar el sentido de los textos. Se pueden hacer ajustes menores de longitud si el diseño lo pide, avisando a Rodrigo. Los nombres de tecnologías y de clientes no se traducen.
 
 ### 1. Header
 
 | | ES | EN |
 |---|---|---|
-| Enlaces | Cómo trabajamos · Perfiles · Casos · Contacto | How we work · Profiles · Case studies · Contact |
+| Enlaces | Cómo trabajamos · Qué hacemos · Casos · Contacto | How we work · What we do · Case studies · Contact |
 | Botón | Contacto | Contact |
 
 ### 2. Hero
 
 **ES**
-- Eyebrow: Equipos de Data e IA para consultoras
-- Título: ¿Ganaste el contrato y te falta gente de datos?
-- Subtítulo: Te damos un equipo de Data e IA que lleva años trabajando junto, con un responsable técnico como único interlocutor. Dentro de tus procesos y bajo tu marca.
-- Botón principal: Cuéntanos qué perfiles necesitas → enlaza a `#contacto`
+- Eyebrow: IA y datos en GCP
+- Título: Agentes de IA y RAG en producción sobre GCP. Respondemos por el resultado.
+- Subtítulo: Nos hacemos cargo de una parte concreta de tu proyecto: el agente, el RAG o los pipelines de datos que lo sostienen. Un solo interlocutor técnico en Madrid, trabajo dentro de tus herramientas y un equipo que ejecuta desde Argentina con horario solapado.
+- Botón principal: Cuéntanos el proyecto → enlaza a `#contacto`
 - Botón secundario: Ver casos → enlaza a `#casos`
 
 **EN**
-- Eyebrow: Data & AI teams for consultancies
-- Título: Won the contract but short on data people?
-- Subtítulo: We give you a Data & AI team that has worked together for years, with one technical lead as your single point of contact. Inside your processes and under your brand.
-- Botón principal: Tell us which profiles you need
+- Eyebrow: AI and data on GCP
+- Título: AI agents and RAG in production on GCP. We are accountable for the outcome.
+- Subtítulo: We take ownership of a specific part of your project: the agent, the RAG system or the data pipelines behind it. One technical point of contact in Madrid, work inside your tools, and a team delivering from Argentina with overlapping hours.
+- Botón principal: Tell us about the project
 - Botón secundario: See case studies
 
 ### 3. Franja de clientes
 
-Solo texto, **sin logos** (los logos de otras marcas no se usan sin permiso). Nombres en gris, separados por puntos medios.
+Solo texto, **sin logos** (los logos de otras marcas no se usan sin permiso). Nombres separados por puntos medios.
 
-- ES: Han trabajado con nosotros — Unilever · Whirlpool · Ayesa · Puma · Grupo Dota
-- EN: Companies we have worked with — Unilever · Whirlpool · Ayesa · Puma · Grupo Dota
+- ES: Han trabajado con nosotros: Unilever · Whirlpool · Ayesa · Puma · Grupo Dota
+- EN: Companies we have worked with: Unilever · Whirlpool · Ayesa · Puma · Grupo Dota
 
 ### 4. Por qué nosotros
 
+Cuatro tarjetas en 2 columnas, sin párrafo de introducción.
+
 **ES**
 - Eyebrow: Por qué nosotros
-- Título: Contratar lleva meses. Tu cliente no espera.
-- Intro: Una bolsa de freelancers te deja a ti gestionando personas sueltas frente a tu cliente. Nosotros te damos un equipo.
+- Título: Muchos proyectos de IA no pasan del piloto. Casi nunca es el modelo: son los datos que hay debajo.
 
-Cuatro tarjetas:
-
-1. **Un equipo, no personas sueltas.** Llevamos años trabajando juntos en los mismos proyectos. No pierdes semanas en que se conozcan.
-2. **Un solo interlocutor técnico.** Un responsable técnico con nombre responde por el equipo y por la entrega.
-3. **Reemplazos a nuestro cargo.** Si alguien sale, lo reemplazamos nosotros, sin coste para ti.
-4. **Bajo tu marca.** Tu Jira, tu repositorio, tus code reviews, tu definición de terminado. Para tu cliente, somos parte de tu equipo.
+1. **Un responsable, no personas sueltas.** Hablas con una persona que responde por la entrega. Quién la ejecuta es asunto nuestro.
+2. **Dentro de tus procesos.** Tu Jira, tu repositorio, tus code reviews. Ves todo, todo el tiempo.
+3. **Entregas cortas.** Algo demostrable cada semana y un reporte breve de avance y riesgos.
+4. **Reemplazos a nuestro cargo.** Si alguien sale, lo cubrimos nosotros, sin coste para ti.
 
 **EN**
 - Eyebrow: Why us
-- Título: Hiring takes months. Your client won't wait.
-- Intro: A pool of freelancers leaves you managing loose individuals in front of your client. We give you a team.
+- Título: Many AI projects never get past the pilot. It is rarely the model: it is the data underneath.
 
-1. **A team, not individuals.** We have worked together on the same projects for years. No weeks lost getting to know each other.
-2. **One technical point of contact.** A named technical lead is accountable for the team and the delivery.
-3. **Replacements on us.** If someone leaves, we replace them at no cost to you.
-4. **Under your brand.** Your Jira, your repo, your code reviews, your definition of done. To your client, we are part of your team.
+1. **One accountable lead, not loose individuals.** You talk to one person who is accountable for the delivery. Who does the work is our concern.
+2. **Inside your processes.** Your Jira, your repo, your code reviews. You see everything, all the time.
+3. **Short delivery cycles.** Something you can demo every week, plus a brief report on progress and risks.
+4. **Replacements on us.** If someone leaves, we cover it, at no cost to you.
 
-### 5. Formatos
+### 5. Cómo trabajamos
 
-Dos tarjetas lado a lado. La primera, destacada (borde más claro y etiqueta "Principal" / "Main").
+Tres tarjetas en 3 columnas (en celular, una debajo de otra). La primera, destacada (borde más claro y etiqueta "Para empezar" / "To start").
 
 **ES**
 - Eyebrow: Cómo trabajamos
-- Título: Dos formas de trabajar con nosotros
+- Título: Tres formas de trabajar con nosotros
 
-1. **Equipo dedicado** — etiqueta: Principal. De 1 a 4 personas por mes, responsable técnico incluido. Mínimo 3 meses.
-2. **Alcance cerrado.** Entregable definido, precio fijo y fecha. Ideal para un primer proyecto.
+1. **Paquete cerrado** (etiqueta: Para empezar). Entregable definido, precio fijo, fecha y pago por hito.
+2. **Equipo dedicado.** De 1 a 3 personas por mes, con responsable técnico. Mínimo 3 meses.
+3. **Soporte y evolución mensual.** Mantenemos tu plataforma de datos en marcha: monitorización, corrección de errores y cambios. Bolsa de horas mensual, sin depender de una sola persona.
 
 **EN**
 - Eyebrow: How we work
-- Título: Two ways to work with us
+- Título: Three ways to work with us
 
-1. **Dedicated team** — label: Main. 1 to 4 people per month, technical lead included. 3-month minimum.
-2. **Fixed scope.** Defined deliverable, fixed price and date. Ideal for a first project.
+1. **Fixed package** (label: To start). Defined deliverable, fixed price, set date and payment per milestone.
+2. **Dedicated team.** 1 to 3 people per month, with a technical lead. 3-month minimum.
+3. **Monthly support and evolution.** We keep your data platform running: monitoring, fixing failures and making changes. A monthly block of hours, without depending on a single person.
 
-### 6. Perfiles
+### 6. Qué hacemos
 
-Tres tarjetas. Cada una con el nombre del perfil, una frase y el stack en "chips" (pastillas pequeñas con borde).
+`id="que-hacemos"`. Cuatro tarjetas en 2 columnas. Cada una con un título, una frase y las tecnologías en "chips" (pastillas pequeñas con borde).
 
 **ES**
-- Eyebrow: Perfiles
-- Título: Los perfiles que sumamos a tu proyecto
+- Eyebrow: Qué hacemos
+- Título: De qué podemos hacernos cargo en tu proyecto
 
-1. **Data Engineer.** Pipelines de datos fiables, de la ingesta al modelo listo para consumir. Chips: Python · SQL · Airflow · dbt · BigQuery · Cloud SQL
-2. **Cloud / Data Architect.** Diseño de plataformas de datos, migraciones y gobierno del dato. Chips: GCP · Migraciones Azure → GCP · Kubernetes · Modelado · Gobierno del dato
-3. **AI Engineer.** IA en producción sobre datos gobernados. Chips: RAG · Sistemas multi-agente · Vertex AI · Apps con LLM · Modelos predictivos
+1. **Agentes de IA.** Agentes y sistemas multiagente con respuestas trazables y fuentes citadas. Chips: Vertex AI · Gemini · Google ADK · Sistemas multiagente
+2. **RAG sobre tus datos.** Consulta en lenguaje natural sobre documentos y BigQuery, con evaluación de respuestas. Chips: RAG · BigQuery Vector Search · Python · Text-to-SQL
+3. **Pipelines de datos.** Ingesta, orquestación y modelado, hasta el cuadro de mando en Looker, Power BI o Tableau: la base que necesita cualquier sistema de IA. Chips: Cloud Composer · Airflow · Dataflow · Pub/Sub · BigQuery · Looker · Power BI · Tableau
+4. **Migración a GCP.** De on-premise o Azure a BigQuery, con infraestructura como código. Chips: Azure → GCP · Terraform · Kubernetes
 
 **EN**
-- Eyebrow: Profiles
-- Título: The profiles we add to your project
+- Eyebrow: What we do
+- Título: What we can take ownership of in your project
 
-1. **Data Engineer.** Reliable data pipelines, from ingestion to consumption-ready models.
-2. **Cloud / Data Architect.** Data platform design, migrations and data governance. Chips: GCP · Azure → GCP migrations · Kubernetes · Data modeling · Data governance
-3. **AI Engineer.** Production AI on top of governed data. Chips: RAG · Multi-agent systems · Vertex AI · LLM apps · Predictive models
+1. **AI agents.** Agents and multi-agent systems with traceable answers and cited sources. Chips: Vertex AI · Gemini · Google ADK · Multi-agent systems
+2. **RAG on your data.** Natural-language queries over documents and BigQuery, with answer evaluation.
+3. **Data pipelines.** Ingestion, orchestration and modeling, all the way to dashboards in Looker, Power BI or Tableau: the foundation every AI system needs.
+4. **Migration to GCP.** From on-premises or Azure to BigQuery, with infrastructure as code.
 
 ### 7. Cómo empezamos
 
@@ -328,103 +334,97 @@ Tres pasos numerados (estilo proceso, con el número grande en blanco, con degra
 - Eyebrow: Cómo empezamos
 - Título: Sin riesgo para ti frente a tu cliente
 
-1. **Nos cuentas el proyecto.** Contrato, stack, plazo y perfiles que te faltan.
-2. **Tu arquitecto entrevista al equipo.** Antes de arrancar, conoces a quienes van a trabajar contigo.
-3. **Arrancamos con una revisión a las dos semanas.** Empezamos por un alcance acotado. Si no encaja, lo dejamos ahí.
+1. **Diagnóstico inicial.** Dos o tres días revisando tu caso, con un documento de hallazgos.
+2. **Piloto de 4 semanas.** Revisión a los 15 días con un entregable definido por escrito. Si no encaja, lo dejamos ahí.
+3. **Pago por hito.** Pagas lo que ya viste.
 
 **EN**
 - Eyebrow: How we start
 - Título: No risk for you in front of your client
 
-1. **Tell us about the project.** Contract, stack, timeline and the profiles you are missing.
-2. **Your architect interviews the team.** Before we start, you meet the people who will work with you.
-3. **We start with a two-week review.** We begin with a limited scope. If it is not a fit, we stop there.
+1. **Initial assessment.** Two or three days reviewing your case, with a findings document.
+2. **4-week pilot.** A review at day 15, against a deliverable defined in writing. If it is not a fit, we stop there.
+3. **Payment per milestone.** You pay for what you have already seen.
 
 ### 8. Casos
 
-`id="casos"`. Cinco tarjetas en grilla (Ayesa y Unilever más grandes, en la primera fila). Cada tarjeta: cliente, título, texto breve y chips de stack.
+`id="casos"`. Cinco tarjetas en 2 columnas, todas del mismo ancho; la quinta ocupa el ancho completo. Cada tarjeta: cliente, título, texto breve y chips de stack. Orden: Ayesa, Banca, Unilever, Whirlpool, Grupo Dota.
 
 **ES**
 - Eyebrow: Casos
 - Título: Lo que hemos hecho
 
-1. **Ayesa — Datos e IA para el sector público.** Plataforma de datos en GCP sobre fuentes muy distintas entre sí (webs, XML, APIs), con gobierno del dato por capas. Sobre ella, agentes de IA que responden preguntas en lenguaje natural, hoy en producción. Chips: BigQuery · Airflow · Dataproc/Spark · GKE · Vertex AI · Gemini
-2. **Unilever — 4 años como equipo dedicado.** Un equipo de 5 personas sobre una base de 500 tablas alimentada por distintos proveedores, incluida la migración de su ETL de Azure a GCP. Es el mismo equipo que trabaja hoy en Código Nativo. Chips: Python · SQL · Airflow · BigQuery · Azure → GCP
-3. **Banca — Sistema multi-agente en producción.** Para analistas de riesgo y negocio. Cada respuesta cita su fuente o dice que no tiene datos, solo lee datos curados y anonimizados, y todo queda auditado. Chips: Google ADK · Gemini · Vertex AI Agent Engine · BigQuery Vector Search
-4. **Whirlpool — Sell out unificado.** Unificamos el sell out de sus clientes, que llegaba en formatos dispares, y lo cruzamos con las ventas de SAP. Pasaron de informes mensuales a ventas actualizadas cada hora. Chips: SAP · ETL · BI
-5. **Grupo Dota — Modelos predictivos sobre 1.500 autobuses.** Predicción de consumo, stock y gastos, desgaste de neumáticos por marca y perfiles de riesgo de siniestralidad, sobre los datos operativos de la flota. Chips: Machine Learning · Regresión · Random Forest
+1. **Ayesa: Datos e IA para el sector público.** Plataforma de datos en GCP sobre fuentes muy distintas entre sí (webs, XML, APIs), con gobierno del dato por capas. Sobre ella, agentes de IA que responden preguntas en lenguaje natural, hoy en producción. Chips: BigQuery · Airflow · Dataproc/Spark · GKE · Vertex AI · Gemini
+2. **Banca: Sistema multiagente en producción.** Para analistas de riesgo y negocio. Cada respuesta cita su fuente o dice que no tiene datos, solo lee datos curados y anonimizados, y todo queda auditado. Chips: Google ADK · Gemini · Vertex AI Agent Engine · BigQuery Vector Search
+3. **Unilever: 4 años como equipo dedicado.** Un equipo de 5 personas sobre una base de 500 tablas alimentada por distintos proveedores, incluida la migración de su ETL de Azure a GCP. Parte de ese equipo trabaja hoy en Código Nativo. Chips: Python · SQL · Airflow · BigQuery · Azure → GCP · Power BI
+4. **Whirlpool: Sell out unificado.** Unificamos el sell out de sus clientes, que llegaba en formatos dispares, y lo cruzamos con las ventas de SAP. Pasaron de informes mensuales a ventas actualizadas cada hora. Chips: SAP · ETL · Tableau
+5. **Grupo Dota: Modelos predictivos sobre 1.500 autobuses.** Predicción de consumo, stock y gastos, desgaste de neumáticos por marca y perfiles de riesgo de siniestralidad, sobre los datos operativos de la flota. Chips: Machine Learning · Regresión · Random Forest
 
 **EN**
 - Eyebrow: Case studies
 - Título: What we have done
 
-1. **Ayesa — Data and AI for the public sector.** A GCP data platform over highly heterogeneous sources (web, XML, APIs), with layered data governance. On top of it, AI agents that answer questions in natural language, now in production.
-2. **Unilever — 4 years as a dedicated team.** A 5-person team on a 500-table database fed by multiple vendors, including the migration of their ETL from Azure to GCP. It is the same team working at Código Nativo today.
-3. **Banking — Multi-agent system in production.** For risk and business analysts. Every answer cites its source or says there is no data, it only reads curated and anonymized data, and everything is audited.
-4. **Whirlpool — Unified sell-out.** We unified their customers' sell-out data, which arrived in disparate formats, and joined it with SAP sales. They went from monthly reports to sales updated every hour.
-5. **Grupo Dota — Predictive models on 1,500 buses.** Forecasting of fuel consumption, stock and costs, tire wear by brand and accident-risk profiles, on the fleet's operational data.
+1. **Ayesa: Data and AI for the public sector.** A GCP data platform over highly heterogeneous sources (web, XML, APIs), with layered data governance. On top of it, AI agents that answer questions in natural language, now in production.
+2. **Banking: Multi-agent system in production.** For risk and business analysts. Every answer cites its source or says there is no data, it only reads curated and anonymized data, and everything is audited.
+3. **Unilever: 4 years as a dedicated team.** A 5-person team on a 500-table database fed by multiple vendors, including the migration of their ETL from Azure to GCP. Part of that team works at Código Nativo today.
+4. **Whirlpool: Unified sell-out.** We unified their customers' sell-out data, which arrived in disparate formats, and joined it with SAP sales. They went from monthly reports to sales updated every hour.
+5. **Grupo Dota: Predictive models on 1,500 buses.** Forecasting of fuel consumption, stock and costs, tire wear by brand and accident-risk profiles, on the fleet's operational data.
 
 ### 9. Quién responde
 
-Dos columnas: foto a la izquierda (`assets/rodrigo-lauro.jpg`, recorte circular o con bordes redondeados, con un brillo blanco suave detrás) y texto a la derecha. En celular, foto arriba.
+Dos columnas: foto a la izquierda (`assets/rodrigo-lauro.jpg`, con bordes redondeados y un brillo blanco suave detrás) y texto a la derecha. En celular, foto arriba.
 
 **ES**
 - Eyebrow: Quién responde
 - Nombre: Rodrigo Lauro
 - Cargo: Cofundador y responsable técnico
-- Texto: Ingeniero en Sistemas. Vivo en Madrid y puedo reunirme contigo en persona. El equipo trabaja desde Argentina con horario solapado con la jornada española.
+- Texto: Ingeniero en Sistemas, especialización en Inteligencia Artificial (UBA). Estoy en Madrid: cada proyecto empieza con una reunión en persona y respondo por cada entrega. Si tu arquitecto quiere entrevistarme antes de empezar, encantado. El equipo trabaja desde Argentina con horario solapado con la jornada española.
 - `alt` de la foto: Rodrigo Lauro, cofundador de Código Nativo
 
 **EN**
 - Eyebrow: Who is accountable
 - Cargo: Co-founder and technical lead
-- Texto: Systems engineer. I live in Madrid and can meet you in person. The team works from Argentina with hours that overlap the Spanish working day.
+- Texto: Systems Engineer, specialized in Artificial Intelligence (UBA). I am based in Madrid: every project starts with an in-person meeting, and I am accountable for every delivery. If your architect wants to interview me before we start, I am happy to meet them. The team works from Argentina with hours that overlap the Spanish working day.
 - `alt`: Rodrigo Lauro, co-founder of Código Nativo
 
 ### 10. Contacto
 
 `id="contacto"`. Formulario con Formspree, centrado, dentro de una tarjeta.
 
-- `<form action="https://formspree.io/f/XXXX" method="POST">` — reemplazar `XXXX` por la dirección que pase Rodrigo.
+- `<form action="https://formspree.io/f/XXXX" method="POST">`: reemplazar `XXXX` por la dirección que pase Rodrigo.
 - Envío **simple** (el formulario se manda de forma normal y Formspree muestra su página de agradecimiento). No hace falta JavaScript para enviar.
 - Campos (todos con `label` visible y `name`): nombre (obligatorio), empresa (obligatorio), email (obligatorio, `type="email"`), mensaje (obligatorio, `textarea`).
-- Agregar un campo oculto `_subject` con el valor "Contacto desde la web".
+- Campo oculto `_subject` con el valor "Contacto desde la web".
 
 **ES**
 - Eyebrow: Contacto
-- Título: Cuéntanos qué perfiles necesitas
-- Texto: Te respondemos en menos de 24 horas laborables.
-- Labels: Nombre · Empresa · Email · ¿Qué perfiles necesitas y para cuándo?
+- Título: Cuéntanos el proyecto
+- Texto: Qué hay que construir, en qué plazo y con qué stack. Te respondemos en 24 horas.
+- Labels: Nombre · Empresa · Email · ¿Qué hay que construir y para cuándo?
 - Botón: Enviar
 
 **EN**
 - Eyebrow: Contact
-- Título: Tell us which profiles you need
-- Texto: We reply within one business day.
-- Labels: Name · Company · Email · Which profiles do you need, and by when?
+- Título: Tell us about the project
+- Texto: What needs to be built, by when and on which stack. We reply within 24 hours.
+- Labels: Name · Company · Email · What needs to be built, and by when?
 - Botón: Send
-
-Como el formulario también existe en dos idiomas, alcanza con duplicar los textos (labels, título y botón) con las clases `lang-es` / `lang-en`. El formulario en sí puede ser uno solo.
 
 ### 11. Footer
 
 - Logo + "Código Nativo"
 - Email: rodrigo.lauro@codigonativo.com.ar (enlace `mailto:`)
-- LinkedIn: enlace a la página de la empresa (Rodrigo te pasa la dirección)
-- Ubicación — ES: Meco (Madrid) · Buenos Aires — EN: Meco (Madrid, Spain) · Buenos Aires, Argentina
+- LinkedIn: https://www.linkedin.com/company/codigo-nativo/
+- Ubicación ES: Meco (Madrid) · Buenos Aires. EN: Meco (Madrid, Spain) · Buenos Aires, Argentina
 - © 2026 Código Nativo
 
 ## Lo que NO hay que hacer
 
-- No mencionar el producto de flota ni enlazar a su web.
+- No usar el guion largo en ningún texto.
+- No mencionar dbt.
 - No poner precios ni tarifas.
+- No mencionar el producto de flota ni enlazar a su web.
 - No inventar números, clientes, testimonios ni años de experiencia.
 - No usar logos de clientes.
 - No usar colores: solo negro, blanco y grises (en particular, nada de violeta).
 - No usar frameworks, librerías de JavaScript ni herramientas de compilación.
-
-## Cuando termines
-
-1. Explicale a Rodrigo la estructura del archivo: qué hay en el `<head>`, en el `<style>`, en el `<body>` y en el `<script>`.
-2. Decile cómo abrir la página con Live Server.
-3. Pasale la lista de cosas que tiene que revisar: logo, foto, formulario de prueba (que envíe un mensaje a sí mismo para comprobar que llega) y la vista en celular.
